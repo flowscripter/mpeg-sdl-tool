@@ -32,7 +32,13 @@ describe("MPEG SDL Tool tests", () => {
       throw new Error("Mock exit");
     });
 
-    process.argv = ["", "", "validate", "-i", "tests/sample_specifications/valid.sdl"];
+    process.argv = [
+      "",
+      "",
+      "validate",
+      "-i",
+      "tests/sample_specifications/valid.sdl",
+    ];
 
     await expect(cli()).rejects.toThrow("Mock exit");
 
@@ -45,7 +51,13 @@ describe("MPEG SDL Tool tests", () => {
       throw new Error("Mock exit");
     });
 
-    process.argv = ["", "", "validate", "-i", "tests/sample_specifications/invalid.sdl"];
+    process.argv = [
+      "",
+      "",
+      "validate",
+      "-i",
+      "tests/sample_specifications/invalid.sdl",
+    ];
 
     await expect(cli()).rejects.toThrow("Mock exit");
 
