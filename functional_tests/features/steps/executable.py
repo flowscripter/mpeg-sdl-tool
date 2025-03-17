@@ -5,6 +5,9 @@ from behave import when, then
 def step_impl(context):
     context.pexpect_wrapper.start()
 
+@when('the executable is launched with arguments "{args}"')
+def step_impl(context, args):
+    context.pexpect_wrapper.start(args)
 
 @then('the executable should complete with exit code {code:d}')
 def step_impl(context, code):

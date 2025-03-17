@@ -11,10 +11,13 @@ class PExpectWrapper:
         self.child = None
         self.output = None
 
-    def start(self):
+    def start(self, args=None):
         assert self.child is None
 
-        self.child = PopenSpawn(self.executable, encoding='utf-8')
+        if args:
+            self.child = PopenSpawn(self.executable + ' ' + args, encoding='utf-8')
+        else:
+            self.child = PopenSpawn(self.executable, encoding='utf-8')
 
     def expect(self, message):
         assert self.child is not None
