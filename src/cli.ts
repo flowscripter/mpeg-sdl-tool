@@ -1,4 +1,5 @@
 import {
+  AsciiBannerGeneratorServiceProvider,
   BannerServiceProvider,
   launchMultiCommandCLI,
   SyntaxHighlighterServiceProvider,
@@ -21,6 +22,7 @@ export async function cli(): Promise<void> {
     false, // disable key-value service
     [
       new BannerServiceProvider(50), // renders an ascii banner on CLI launch
+      new AsciiBannerGeneratorServiceProvider(45), // exposes ascii banner generation service
       new SyntaxHighlighterServiceProvider(40), // exposes syntax highlighting service
     ],
   );

@@ -1,7 +1,6 @@
 import {
   type ArgumentValues,
   ArgumentValueTypeName,
-  ComplexValueTypeName,
   type Context,
   PRINTER_SERVICE_ID,
   type PrinterService,
@@ -18,7 +17,7 @@ const prettify: SubCommand = {
       name: "input",
       description: "Input SDL file",
       type: ArgumentValueTypeName.STRING,
-      shortAlias: "i"
+      shortAlias: "i",
     },
   ],
   positionals: [],
