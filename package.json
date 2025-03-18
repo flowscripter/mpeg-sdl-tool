@@ -1,5 +1,20 @@
 {
   "name": "@flowscripter/mpeg-sdl-tool",
+  "description": "ISO/IEC 14496-34 Syntactic Description Language (MPEG SDL) CLI tool",
+  "homepage": "https://github.com/flowscripter/mpeg-sdl-tool#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flowscripter/mpeg-sdl-tool.git"
+  },
+  "license": "MIT",
+  "keywords": [
+    "bun",
+    "mpeg",
+    "sdl",
+    "parser",
+    "cli",
+    "executable"
+  ],
   "module": "index.ts",
   "type": "module",
   "version": "0.0.0",
@@ -13,6 +28,7 @@
     "typescript": "^5.8.2"
   },
   "dependencies": {
-    "@flowscripter/dynamic-cli-framework": "^1.0.10"
+    "@flowscripter/dynamic-cli-framework": "^1.0.10",
+    "@flowscripter/mpeg-sdl-parser": "^1.1.0"
   }
 }
