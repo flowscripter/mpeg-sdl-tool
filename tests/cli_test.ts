@@ -85,4 +85,54 @@ describe("MPEG SDL Tool tests", () => {
     expectCallsInclude(mockStderr, "LEXICAL ERROR");
     mockExit.mockRestore();
   });
+
+  test("CLI prettify invocation on valid SDL test", async () => {
+    const mockExit = spyOn(process, "exit").mockImplementation(() => {
+      throw new Error("Mock exit");
+    });
+    const mockStderr = spyOn(process.stderr, "write").mockImplementation(() =>
+      true
+    );
+    const mockStdout = spyOn(process.stdout, "write").mockImplementation(() =>
+      true
+    );
+
+    process.argv = [
+      "",
+      "",
+      "prettify",
+      "-i",
+      "tests/sample_specifications/valid.sdl",
+    ];
+
+    await expect(cli()).rejects.toThrow("Mock exit");
+
+    expect(mockExit).toHaveBeenCalledWith(0);
+    expectCallsInclude(mockStderr, "Syntactic Description Language");
+    expectCallsInclude(mockStdout, "transport_packet");
+    mockExit.mockRestore();
+  });
+
+  test("CLI prettify invocation on invalid SDL test", async () => {
+    const mockExit = spyOn(process, "exit").mockImplementation(() => {
+      throw new Error("Mock exit");
+    });
+    const mockStderr = spyOn(process.stderr, "write").mockImplementation(() =>
+      true
+    );
+
+    process.argv = [
+      "",
+      "",
+      "prettify",
+      "-i",
+      "tests/sample_specifications/invalid.sdl",
+    ];
+
+    await expect(cli()).rejects.toThrow("Mock exit");
+
+    expect(mockExit).toHaveBeenCalledWith(0);
+    expectCallsInclude(mockStderr, "LEXICAL ERROR");
+    mockExit.mockRestore();
+  });
 });
