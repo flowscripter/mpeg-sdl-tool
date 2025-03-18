@@ -1,16 +1,25 @@
 import process from "node:process";
 import { describe, expect, spyOn, test } from "bun:test";
 import { cli } from "../src/cli.ts";
+import { expectCallsInclude } from "./fixtures/util.ts";
 
 describe("MPEG SDL Tool tests", () => {
   test("CLI test", async () => {
     const mockExit = spyOn(process, "exit").mockImplementation(() => {
       throw new Error("Mock exit");
     });
+    const mockStderr = spyOn(process.stderr, "write").mockImplementation(() =>
+      true
+    );
+    const mockStdout = spyOn(process.stdout, "write").mockImplementation(() =>
+      true
+    );
 
     await expect(cli()).rejects.toThrow("Mock exit");
 
     expect(mockExit).toHaveBeenCalledWith(2);
+    expectCallsInclude(mockStderr, "No command specified");
+    expectCallsInclude(mockStdout, "Try running");
     mockExit.mockRestore();
   });
 
@@ -18,12 +27,16 @@ describe("MPEG SDL Tool tests", () => {
     const mockExit = spyOn(process, "exit").mockImplementation(() => {
       throw new Error("Mock exit");
     });
+    const mockStderr = spyOn(process.stderr, "write").mockImplementation(() =>
+      true
+    );
 
     process.argv = ["", "", "validate"];
 
     await expect(cli()).rejects.toThrow("Mock exit");
 
     expect(mockExit).toHaveBeenCalledWith(1);
+    expectCallsInclude(mockStderr, "Parse error");
     mockExit.mockRestore();
   });
 
@@ -31,6 +44,9 @@ describe("MPEG SDL Tool tests", () => {
     const mockExit = spyOn(process, "exit").mockImplementation(() => {
       throw new Error("Mock exit");
     });
+    const mockStderr = spyOn(process.stderr, "write").mockImplementation(() =>
+      true
+    );
 
     process.argv = [
       "",
@@ -43,6 +59,7 @@ describe("MPEG SDL Tool tests", () => {
     await expect(cli()).rejects.toThrow("Mock exit");
 
     expect(mockExit).toHaveBeenCalledWith(0);
+    expectCallsInclude(mockStderr, "is valid");
     mockExit.mockRestore();
   });
 
@@ -50,6 +67,9 @@ describe("MPEG SDL Tool tests", () => {
     const mockExit = spyOn(process, "exit").mockImplementation(() => {
       throw new Error("Mock exit");
     });
+    const mockStderr = spyOn(process.stderr, "write").mockImplementation(() =>
+      true
+    );
 
     process.argv = [
       "",
@@ -62,6 +82,7 @@ describe("MPEG SDL Tool tests", () => {
     await expect(cli()).rejects.toThrow("Mock exit");
 
     expect(mockExit).toHaveBeenCalledWith(0);
+    expectCallsInclude(mockStderr, "LEXICAL ERROR");
     mockExit.mockRestore();
   });
 });
