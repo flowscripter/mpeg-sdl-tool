@@ -12,6 +12,9 @@ import {
 } from "@flowscripter/dynamic-cli-framework";
 import { Parser } from "@flowscripter/mpeg-sdl-parser";
 
+/**
+ * Command to parse and validate an SDL file.
+ */
 const validate: SubCommand = {
   name: "validate",
   description: "Parse and validate an SDL file",

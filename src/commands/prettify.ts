@@ -15,6 +15,9 @@ import {
 import sdl from "./sdl";
 import { Parser } from "@flowscripter/mpeg-sdl-parser";
 
+/**
+ * Command to parse and prettify an SDL file.
+ */
 const prettify: SubCommand = {
   name: "prettify",
   description: "Parse and prettify an SDL file",

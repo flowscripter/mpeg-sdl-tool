@@ -1,7 +1,6 @@
-/*
-Language: SDL
-*/
-
+/**
+ * Highlight.js SDL syntax highlighting definition
+ */
 export default function (hljs) {
   const regex = hljs.regex;
   // added for historic reasons because `hljs.C_LINE_COMMENT_MODE` does
