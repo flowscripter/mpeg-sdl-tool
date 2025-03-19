@@ -8,6 +8,11 @@
 
 > ISO/IEC 14496-34 Syntactic Description Language (MPEG SDL) CLI tool
 
+## TODO
+
+- Define SDL specific syntax for highlighting instead of using C syntax
+  definition.
+
 ## Binary Executable Usage
 
 #### MacOS
@@ -74,10 +79,6 @@ Lint:
 
 `deno lint index.ts src/ tests/`
 
-Generate HTML API Documentation:
-
-`deno doc --html --name=mpeg-sdl-tool index.ts`
-
 ## Documentation
 
 Refer to the [mpeg-sdl-parser](https://github.com/flowscripter/mpeg-sdl-parser)
@@ -86,12 +87,6 @@ documentation.
 Refer to the
 [dynamic-cli-framework](https://github.com/flowscripter/dynamic-cli-framework)
 documentation.
-
-### API
-
-Link to auto-generated API docs:
-
-[API Documentation](https://flowscripter.github.io/mpeg-sdl-tool/index.html)
 
 ## License
 
