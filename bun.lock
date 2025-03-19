@@ -18,7 +18,7 @@
   "packages": {
     "@flowscripter/dynamic-cli-framework": ["@flowscripter/dynamic-cli-framework@1.0.11", "", { "dependencies": { "emphasize": "^7.0.0", "fastest-levenshtein": "^1.0.16", "figlet": "^1.8.0", "highlight.js": "^11.11.1", "supports-color": "^10.0.0", "ts-log": "^2.2.7" }, "peerDependencies": { "typescript": "^5.8.2" } }, "sha512-hYvMrB82e1KFPleWuN1oWM8JQ+Hy44/zq5NibNL5ysX8kPSbJ5p2MYrHLBYP7A4KHqQaiRRpGBP4Itq9xTzPaQ=="],
 
-    "@flowscripter/mpeg-sdl-parser": ["@flowscripter/mpeg-sdl-parser@1.1.2", "", { "dependencies": { "typescript-parsec": "^0.3.4" }, "peerDependencies": { "typescript": "^5.8.2" } }, "sha512-lpNjiAh7JsrmRR3R8DnvTwBiJ7PuSitFK0PL3Ux+3JzdIgL8PaSgbiV80mYt80yD/YcOFVe5BvWJaEqsVYFarA=="],
+    "@flowscripter/mpeg-sdl-parser": ["@flowscripter/mpeg-sdl-parser@1.1.3", "", { "dependencies": { "typescript-parsec": "^0.3.4" }, "peerDependencies": { "typescript": "^5.8.2" } }, "sha512-LVD5Of6tUOK5qsX+c387uc047z7gXkPR5J5TgmZ2Xh4G22EXRyBIrmtvo0YsG8pelb6h0EVUJ5MaywkLUWwPRw=="],
 
     "@types/bun": ["@types/bun@1.2.5", "", { "dependencies": { "bun-types": "1.2.5" } }, "sha512-w2OZTzrZTVtbnJew1pdFmgV99H0/L+Pvw+z1P67HaR18MHOzYnTYOi6qzErhK8HyT+DB782ADVPPE92Xu2/Opg=="],
 
