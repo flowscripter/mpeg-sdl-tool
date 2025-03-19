@@ -10,7 +10,8 @@
 
 ## TODO
 
-- Define SDL specific syntax for highlighting instead of using C syntax definition.
+- Define SDL specific syntax for highlighting instead of using C syntax
+  definition.
 
 ## Binary Executable Usage
 
