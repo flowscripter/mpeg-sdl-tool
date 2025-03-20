@@ -4,7 +4,7 @@ import { cli } from "../src/cli.ts";
 import { expectCallsInclude } from "./fixtures/util.ts";
 
 describe("MPEG SDL Tool tests", () => {
-  test("CLI test", async () => {
+  test("CLI test", () => {
     const mockExit = spyOn(process, "exit").mockImplementation(() => {
       throw new Error("Mock exit");
     });
@@ -15,7 +15,7 @@ describe("MPEG SDL Tool tests", () => {
       true
     );
 
-    await expect(cli()).rejects.toThrow("Mock exit");
+    expect(cli()).rejects.toThrow("Mock exit");
 
     expect(mockExit).toHaveBeenCalledWith(2);
     expectCallsInclude(mockStderr, "No command specified");
@@ -23,7 +23,7 @@ describe("MPEG SDL Tool tests", () => {
     mockExit.mockRestore();
   });
 
-  test("CLI invalid command invocation test", async () => {
+  test("CLI invalid command invocation test", () => {
     const mockExit = spyOn(process, "exit").mockImplementation(() => {
       throw new Error("Mock exit");
     });
@@ -33,14 +33,14 @@ describe("MPEG SDL Tool tests", () => {
 
     process.argv = ["", "", "validate"];
 
-    await expect(cli()).rejects.toThrow("Mock exit");
+    expect(cli()).rejects.toThrow("Mock exit");
 
     expect(mockExit).toHaveBeenCalledWith(1);
     expectCallsInclude(mockStderr, "Parse error");
     mockExit.mockRestore();
   });
 
-  test("CLI validate invocation on valid SDL test", async () => {
+  test("CLI validate invocation on valid SDL test", () => {
     const mockExit = spyOn(process, "exit").mockImplementation(() => {
       throw new Error("Mock exit");
     });
@@ -56,14 +56,14 @@ describe("MPEG SDL Tool tests", () => {
       "tests/sample_specifications/valid.sdl",
     ];
 
-    await expect(cli()).rejects.toThrow("Mock exit");
+    expect(cli()).rejects.toThrow("Mock exit");
 
     expect(mockExit).toHaveBeenCalledWith(0);
     expectCallsInclude(mockStderr, "is valid");
     mockExit.mockRestore();
   });
 
-  test("CLI validate invocation on invalid SDL test", async () => {
+  test("CLI validate invocation on invalid SDL test", () => {
     const mockExit = spyOn(process, "exit").mockImplementation(() => {
       throw new Error("Mock exit");
     });
@@ -79,14 +79,14 @@ describe("MPEG SDL Tool tests", () => {
       "tests/sample_specifications/invalid.sdl",
     ];
 
-    await expect(cli()).rejects.toThrow("Mock exit");
+    expect(cli()).rejects.toThrow("Mock exit");
 
     expect(mockExit).toHaveBeenCalledWith(0);
     expectCallsInclude(mockStderr, "LEXICAL ERROR");
     mockExit.mockRestore();
   });
 
-  test("CLI prettify invocation on valid SDL test", async () => {
+  test("CLI prettify invocation on valid SDL test", () => {
     const mockExit = spyOn(process, "exit").mockImplementation(() => {
       throw new Error("Mock exit");
     });
@@ -105,7 +105,7 @@ describe("MPEG SDL Tool tests", () => {
       "tests/sample_specifications/valid.sdl",
     ];
 
-    await expect(cli()).rejects.toThrow("Mock exit");
+    expect(cli()).rejects.toThrow("Mock exit");
 
     expect(mockExit).toHaveBeenCalledWith(0);
     expectCallsInclude(mockStderr, "Syntactic Description Language");
@@ -113,7 +113,7 @@ describe("MPEG SDL Tool tests", () => {
     mockExit.mockRestore();
   });
 
-  test("CLI prettify invocation on invalid SDL test", async () => {
+  test("CLI prettify invocation on invalid SDL test", () => {
     const mockExit = spyOn(process, "exit").mockImplementation(() => {
       throw new Error("Mock exit");
     });
@@ -129,7 +129,7 @@ describe("MPEG SDL Tool tests", () => {
       "tests/sample_specifications/invalid.sdl",
     ];
 
-    await expect(cli()).rejects.toThrow("Mock exit");
+    expect(cli()).rejects.toThrow("Mock exit");
 
     expect(mockExit).toHaveBeenCalledWith(0);
     expectCallsInclude(mockStderr, "LEXICAL ERROR");
