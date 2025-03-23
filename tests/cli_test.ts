@@ -109,7 +109,7 @@ describe("MPEG SDL Tool tests", () => {
 
     expect(mockExit).toHaveBeenCalledWith(0);
     expectCallsInclude(mockStderr, "Syntactic Description Language");
-    expectCallsInclude(mockStdout, "transport_packet");
+    expectCallsInclude(mockStdout, "sdl");
     mockExit.mockRestore();
   });
 

@@ -2,6 +2,7 @@
  * Highlight.js SDL syntax highlighting definition
  */
 export default function (hljs) {
+  // TODO: convert to SDL format
   const regex = hljs.regex;
   // added for historic reasons because `hljs.C_LINE_COMMENT_MODE` does
   // not include such support nor can we be sure all the grammars depending
@@ -186,7 +187,6 @@ export default function (hljs) {
     keyword: C_KEYWORDS,
     type: C_TYPES,
     literal: "true false NULL",
-    // TODO: apply hinting work similar to what was done in cpp.js
     built_in:
       "std string wstring cin cout cerr clog stdin stdout stderr stringstream istringstream ostringstream " +
       "auto_ptr deque list queue stack vector map set pair bitset multiset multimap unordered_set " +

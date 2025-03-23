@@ -2,10 +2,11 @@ import {
   AsciiBannerGeneratorServiceProvider,
   BannerServiceProvider,
   launchMultiCommandCLI,
+  PrettyPrinterServiceProvider,
   SyntaxHighlighterServiceProvider,
 } from "@flowscripter/dynamic-cli-framework";
-import command1 from "./commands/validate.ts";
-import command2 from "./commands/prettify.ts";
+import validate from "./commands/validate/validate.ts";
+import prettify from "./commands/prettify/prettify.ts";
 import packageJson from "../package.json";
 
 /**
@@ -13,7 +14,7 @@ import packageJson from "../package.json";
  */
 export async function cli(): Promise<void> {
   await launchMultiCommandCLI(
-    [command1, command2],
+    [validate, prettify],
     "ISO/IEC 14496-34 Syntactic Description Language (MPEG SDL) CLI tool.",
     "mpeg-sdl-tool",
     packageJson.version,
@@ -24,6 +25,7 @@ export async function cli(): Promise<void> {
       new BannerServiceProvider(50), // renders an ascii banner on CLI launch
       new AsciiBannerGeneratorServiceProvider(45), // exposes ascii banner generation service
       new SyntaxHighlighterServiceProvider(40), // exposes syntax highlighting service
+      new PrettyPrinterServiceProvider(40), // exposes pretty printing service
     ],
   );
 }

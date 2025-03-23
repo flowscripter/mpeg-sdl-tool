@@ -6,14 +6,16 @@ import {
   ArgumentValueTypeName,
   type Context,
   Icon,
+  PRETTY_PRINTER_SERVICE_ID,
+  type PrettyPrinterService,
   PRINTER_SERVICE_ID,
   type PrinterService,
   type SubCommand,
   SYNTAX_HIGHLIGHTER_SERVICE_ID,
   type SyntaxHighlighterService,
 } from "@flowscripter/dynamic-cli-framework";
-import sdl from "./sdl";
-import { Parser } from "@flowscripter/mpeg-sdl-parser";
+import prettierPluginSdl from "./prettier/prettierPluginSdl";
+import highlightSyntaxSdl from "./highlight/highlightSyntaxSdl";
 
 /**
  * Command to parse and prettify an SDL file.
@@ -41,10 +43,12 @@ const prettify: SubCommand = {
     const highlighterService = context.getServiceById(
       SYNTAX_HIGHLIGHTER_SERVICE_ID,
     ) as SyntaxHighlighterService;
+    const prettyPrinterService = context.getServiceById(
+      PRETTY_PRINTER_SERVICE_ID,
+    ) as PrettyPrinterService;
 
-    highlighterService.registerSyntax("sdl", sdl);
-
-    const parser = new Parser();
+    prettyPrinterService.registerSyntax("sdl", prettierPluginSdl);
+    highlighterService.registerSyntax("sdl", highlightSyntaxSdl);
 
     const inputSdlFilePath = argumentValues.input as string;
 
@@ -52,11 +56,15 @@ const prettify: SubCommand = {
       path.join(process.cwd(), inputSdlFilePath),
     ).then((buffer) => buffer.toString());
 
+    let prettifiedSdlSpecification: string;
     try {
-      parser.parse(sdlSpecification);
+      prettifiedSdlSpecification = await prettyPrinterService.prettify(
+        sdlSpecification,
+        "sdl",
+      );
     } catch (error) {
       printerService.error(
-        `SDL file ${inputSdlFilePath} is invalid\n`,
+        `SDL file ${inputSdlFilePath} could not be parsed\n`,
         Icon.FAILURE,
       );
       if (error instanceof Error) {
@@ -70,7 +78,7 @@ const prettify: SubCommand = {
 
     await printerService.print(
       highlighterService.highlight(
-        sdlSpecification,
+        prettifiedSdlSpecification,
         "sdl",
       ) + "\n",
     );
