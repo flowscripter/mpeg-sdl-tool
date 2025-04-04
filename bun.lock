@@ -16,9 +16,9 @@
     },
   },
   "packages": {
-    "@flowscripter/dynamic-cli-framework": ["@flowscripter/dynamic-cli-framework@1.1.1", "", { "dependencies": { "emphasize": "^7.0.0", "fastest-levenshtein": "^1.0.16", "figlet": "^1.8.0", "highlight.js": "^11.11.1", "prettier": "^3.5.3", "supports-color": "^10.0.0", "ts-log": "^2.2.7" }, "peerDependencies": { "typescript": "^5.8.2" } }, "sha512-pihEO3TGJBopoc/6d1oC2tjskDocz8jXH82MlopmDlkXsmYt6rrtZMImi/mByaDV/GKHxvEv9Qk6xqLZvoLFvA=="],
+    "@flowscripter/dynamic-cli-framework": ["@flowscripter/dynamic-cli-framework@1.1.2", "", { "dependencies": { "emphasize": "^7.0.0", "fastest-levenshtein": "^1.0.16", "figlet": "^1.8.0", "highlight.js": "^11.11.1", "prettier": "^3.5.3", "supports-color": "^10.0.0", "ts-log": "^2.2.7" }, "peerDependencies": { "typescript": "^5.8.2" } }, "sha512-Xc0Zn8vF2xG3U6ICa8r5NyCsAiQWC4MJKbm1ddl2jgH0A1VbL50EBjnkY3t4yiGPCXVgYM6ednbSJvP2z7eR2w=="],
 
-    "@flowscripter/mpeg-sdl-parser": ["@flowscripter/mpeg-sdl-parser@1.1.5", "", { "dependencies": { "typescript-parsec": "^0.3.4" }, "peerDependencies": { "typescript": "^5.8.2" } }, "sha512-jvlqw1oz2fEa8g9MbcdrE6gRD7HwpMH46dLCPJpdNrISJWd9fA4EIIguJZpwrn9+Iz4kpcnpWGml5nnMcEQOdw=="],
+    "@flowscripter/mpeg-sdl-parser": ["@flowscripter/mpeg-sdl-parser@1.1.6", "", { "dependencies": { "typescript-parsec": "^0.3.4" }, "peerDependencies": { "typescript": "^5.8.2" } }, "sha512-dKsaBRsRSSQik02/PnE9jRx1BYEKvlII9OkKGJpqeETvDQL0YXSsnTdkuwCLsgjMHIjYfSAQlWgfpr+TO1eQtg=="],
 
     "@types/bun": ["@types/bun@1.2.8", "", { "dependencies": { "bun-types": "1.2.7" } }, "sha512-t8L1RvJVUghW5V+M/fL3Thbxcs0HwNsXsnTEBEfEVqGteiJToOlZ/fyOEaR1kZsNqnu+3XA4RI/qmnX4w6+S+w=="],
 
