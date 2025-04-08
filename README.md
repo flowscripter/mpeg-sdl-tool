@@ -29,9 +29,9 @@ In a terminal:
 
 #### Windows
 
-In PowerShell: **(NOTE: This does not currently work...)**
+Via [Winget](https://github.com/microsoft/winget-cli):
 
-`curl -fsSL https://raw.githubusercontent.com/flowscripter/mpeg-sdl-tool/main/script/install.ps1 | powershell`
+`winget install Flowscripter.mpeg-sdl-tool`
 
 #### Manual Install
 

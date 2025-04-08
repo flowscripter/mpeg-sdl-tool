@@ -6,9 +6,12 @@ import {
   ArgumentValueTypeName,
   type Context,
   Icon,
+  Level,
   PRINTER_SERVICE_ID,
   type PrinterService,
   type SubCommand,
+  SYNTAX_HIGHLIGHTER_SERVICE_ID,
+  type SyntaxHighlighterService,
 } from "@flowscripter/dynamic-cli-framework";
 import { Parser } from "@flowscripter/mpeg-sdl-parser";
 
@@ -43,8 +46,20 @@ const validate: SubCommand = {
     ).then((buffer) => buffer.toString());
 
     try {
-      parser.parse(sdlSpecification);
+      const parsedSdlSpecification = parser.parse(sdlSpecification);
 
+      if (printerService.getLevel() === Level.DEBUG) {
+        const highlighterService = context.getServiceById(
+          SYNTAX_HIGHLIGHTER_SERVICE_ID,
+        ) as SyntaxHighlighterService;
+        printerService.debug(
+          highlighterService.highlight(
+            JSON.stringify(parsedSdlSpecification, undefined, 2),
+            "json",
+          ) + "\n",
+        );
+      }
+      printerService.debug;
       printerService.info(
         `SDL file ${inputSdlFilePath} is valid\n`,
         Icon.SUCCESS,

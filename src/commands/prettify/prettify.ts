@@ -14,8 +14,8 @@ import {
   SYNTAX_HIGHLIGHTER_SERVICE_ID,
   type SyntaxHighlighterService,
 } from "@flowscripter/dynamic-cli-framework";
-import prettierPluginSdl from "./prettier/prettierPluginSdl";
-import highlightSyntaxSdl from "./highlight/highlightSyntaxSdl";
+import prettierPluginSdl from "../../prettier/prettierPluginSdl";
+import highlightSyntaxSdl from "../../highlight/highlightSyntaxSdl";
 
 /**
  * Command to parse and prettify an SDL file.
@@ -80,7 +80,7 @@ const prettify: SubCommand = {
       highlighterService.highlight(
         prettifiedSdlSpecification,
         "sdl",
-      ) + "\n",
+      ),
     );
   },
 };

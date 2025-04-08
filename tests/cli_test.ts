@@ -53,7 +53,7 @@ describe("MPEG SDL Tool tests", () => {
       "",
       "validate",
       "-i",
-      "tests/sample_specifications/valid.sdl",
+      "tests/sample_specifications/various_elements.sdl",
     ];
 
     expect(cli()).rejects.toThrow("Mock exit");
@@ -102,7 +102,7 @@ describe("MPEG SDL Tool tests", () => {
       "",
       "prettify",
       "-i",
-      "tests/sample_specifications/valid.sdl",
+      "tests/sample_specifications/various_elements.sdl",
     ];
 
     expect(cli()).rejects.toThrow("Mock exit");
