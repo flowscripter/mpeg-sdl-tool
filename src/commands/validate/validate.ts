@@ -6,21 +6,21 @@ import {
   ArgumentValueTypeName,
   type Context,
   Icon,
+  Level,
   PRINTER_SERVICE_ID,
   type PrinterService,
   type SubCommand,
   SYNTAX_HIGHLIGHTER_SERVICE_ID,
   type SyntaxHighlighterService,
 } from "@flowscripter/dynamic-cli-framework";
-import sdl from "./sdl";
 import { Parser } from "@flowscripter/mpeg-sdl-parser";
 
 /**
- * Command to parse and prettify an SDL file.
+ * Command to parse and validate an SDL file.
  */
-const prettify: SubCommand = {
-  name: "prettify",
-  description: "Parse and prettify an SDL file",
+const validate: SubCommand = {
+  name: "validate",
+  description: "Parse and validate an SDL file",
   options: [
     {
       name: "input",
@@ -30,20 +30,13 @@ const prettify: SubCommand = {
     },
   ],
   positionals: [],
-  usageExamples: [],
-  async execute(
+  execute: async (
     context: Context,
     argumentValues: ArgumentValues,
-  ): Promise<void> {
+  ): Promise<void> => {
     const printerService = context.getServiceById(
       PRINTER_SERVICE_ID,
     ) as PrinterService;
-    const highlighterService = context.getServiceById(
-      SYNTAX_HIGHLIGHTER_SERVICE_ID,
-    ) as SyntaxHighlighterService;
-
-    highlighterService.registerSyntax("sdl", sdl);
-
     const parser = new Parser();
 
     const inputSdlFilePath = argumentValues.input as string;
@@ -53,7 +46,24 @@ const prettify: SubCommand = {
     ).then((buffer) => buffer.toString());
 
     try {
-      parser.parse(sdlSpecification);
+      const parsedSdlSpecification = parser.parse(sdlSpecification);
+
+      if (printerService.getLevel() === Level.DEBUG) {
+        const highlighterService = context.getServiceById(
+          SYNTAX_HIGHLIGHTER_SERVICE_ID,
+        ) as SyntaxHighlighterService;
+        printerService.debug(
+          highlighterService.highlight(
+            JSON.stringify(parsedSdlSpecification, undefined, 2),
+            "json",
+          ) + "\n",
+        );
+      }
+      printerService.debug;
+      printerService.info(
+        `SDL file ${inputSdlFilePath} is valid\n`,
+        Icon.SUCCESS,
+      );
     } catch (error) {
       printerService.error(
         `SDL file ${inputSdlFilePath} is invalid\n`,
@@ -64,17 +74,8 @@ const prettify: SubCommand = {
       } else {
         printerService.warn(String(error) + "\n");
       }
-
-      return;
     }
-
-    await printerService.print(
-      highlighterService.highlight(
-        sdlSpecification,
-        "sdl",
-      ) + "\n",
-    );
   },
 };
 
-export default prettify;
+export default validate;
