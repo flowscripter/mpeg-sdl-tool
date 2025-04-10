@@ -22,14 +22,14 @@
     "access": "public"
   },
   "devDependencies": {
-    "@types/bun": "^1.2.8"
+    "@types/bun": "^1.2.9"
   },
   "peerDependencies": {
     "typescript": "^5.8.3"
   },
   "dependencies": {
     "@flowscripter/dynamic-cli-framework": "^1.1.2",
-    "@flowscripter/mpeg-sdl-parser": "^1.1.8",
+    "@flowscripter/mpeg-sdl-parser": "^1.1.9",
     "prettier": "^3.5.3"
   }
 }
