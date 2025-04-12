@@ -28,8 +28,8 @@
     "typescript": "^5.8.3"
   },
   "dependencies": {
-    "@flowscripter/dynamic-cli-framework": "^1.1.2",
-    "@flowscripter/mpeg-sdl-parser": "^1.1.9",
+    "@flowscripter/dynamic-cli-framework": "^1.1.4",
+    "@flowscripter/mpeg-sdl-parser": "^1.1.11",
     "prettier": "^3.5.3"
   }
 }

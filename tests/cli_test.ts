@@ -3,7 +3,7 @@ import { describe, expect, spyOn, test } from "bun:test";
 import { cli } from "../src/cli.ts";
 import { expectCallsInclude } from "./fixtures/util.ts";
 
-describe("MPEG SDL Tool tests", () => {
+describe("CLI tests", () => {
   test("CLI test", () => {
     const mockExit = spyOn(process, "exit").mockImplementation(() => {
       throw new Error("Mock exit");

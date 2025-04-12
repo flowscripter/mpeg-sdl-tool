@@ -26,4 +26,42 @@ adaptation_field data; // previously declared class
   } if (adaptation_field_control == 0b01 || adaptation_field_control == 0b11) { bit(8) data_byte[N]; }
 }
 
+map Offsets (int) {0b00,{1024},0b01,{2048}}
+
+expandable(20) class odd(int a, B b) extends odder(a, 2): bit(2) id = 2 {
+  reserved unsigned int(Offsets) offset;
+  computed int myArray[2];
+  computed int i = 1;
+  Strange s(1, 2);
+  while (i < 2) {
+    i++;
+  }
+  i = 2;
+  do {
+    i--;
+  } while( i > 0);
+  if (1) {
+    i++;
+  }
+  else if (1) {
+    i--;  }
+
+  if (1) 
+    if (2)
+    i--;
+    else 
+    i++;
+  switch (i) {
+    case 0:
+   case 1:
+      
+      // nothing
+      break;
+    default:
+      i++;
+      //     foo
+  }
+ }
+ class odd2(int a, int b) {
+ }
 // until EOF

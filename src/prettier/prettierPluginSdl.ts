@@ -3,7 +3,7 @@ import {
   Parser as SdlParser,
 } from "@flowscripter/mpeg-sdl-parser";
 import type { Parser, Plugin, Printer, SupportLanguage } from "prettier";
-import print from "./print";
+import printNode from "./print_node";
 const languages: SupportLanguage[] = [
   {
     name: "sdl",
@@ -34,7 +34,7 @@ const parsers: Record<string, Parser<AbstractNode>> = {
 
 const printers: Record<string, Printer<AbstractNode>> = {
   "sdl": {
-    print,
+    print: printNode,
   },
 };
 

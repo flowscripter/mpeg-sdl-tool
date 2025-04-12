@@ -75,11 +75,19 @@ const prettify: SubCommand = {
 
       return;
     }
+    const colorScheme = {
+      keyword: "#ffff00",
+      string: "#00ff00",
+      number: "#00ffff",
+      punctuation: "#00ff00",
+      operator: "#00ff00",
+    };
 
     await printerService.print(
       highlighterService.highlight(
         prettifiedSdlSpecification,
         "sdl",
+        colorScheme,
       ),
     );
   },
