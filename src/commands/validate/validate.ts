@@ -6,11 +6,15 @@ import {
   ArgumentValueTypeName,
   type Context,
   Icon,
+  Level,
   PRINTER_SERVICE_ID,
   type PrinterService,
   type SubCommand,
+  SYNTAX_HIGHLIGHTER_SERVICE_ID,
+  type SyntaxHighlighterService,
 } from "@flowscripter/dynamic-cli-framework";
 import { Parser } from "@flowscripter/mpeg-sdl-parser";
+import outputError from "../../util/output_error";
 
 /**
  * Command to parse and validate an SDL file.
@@ -43,21 +47,33 @@ const validate: SubCommand = {
     ).then((buffer) => buffer.toString());
 
     try {
-      parser.parse(sdlSpecification);
+      const parsedSdlSpecification = parser.parse(sdlSpecification);
 
-      printerService.info(
+      if (printerService.getLevel() === Level.DEBUG) {
+        const highlighterService = context.getServiceById(
+          SYNTAX_HIGHLIGHTER_SERVICE_ID,
+        ) as SyntaxHighlighterService;
+        await printerService.debug(
+          highlighterService.highlight(
+            JSON.stringify(parsedSdlSpecification, undefined, 2),
+            "json",
+          ) + "\n",
+        );
+      }
+
+      await printerService.info(
         `SDL file ${inputSdlFilePath} is valid\n`,
         Icon.SUCCESS,
       );
     } catch (error) {
-      printerService.error(
+      await printerService.error(
         `SDL file ${inputSdlFilePath} is invalid\n`,
         Icon.FAILURE,
       );
       if (error instanceof Error) {
-        printerService.warn(error.message + "\n");
+        await outputError(error, sdlSpecification, context);
       } else {
-        printerService.warn(String(error) + "\n");
+        await printerService.warn(String(error) + "\n");
       }
     }
   },

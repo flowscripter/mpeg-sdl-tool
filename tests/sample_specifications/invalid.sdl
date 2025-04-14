@@ -1,11 +1,11 @@
-class transport _packet {
+class transport_packet {
   unsigned int(8)  sync_byte = 0x47;
   bit(1)           transport_error_indicator;
   bit(1)           payload_unit_start_indicator;
   bit(1)           transport_priority;
   unsigned int(13) PID;
   bit(2)           transport_scrambling_control;
-  bit(2)           adaptation_field_control;
+  bit(2)           adaptation_ field_control;
 
   computed unsigned int N = 184;
 
