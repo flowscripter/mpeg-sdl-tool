@@ -55,12 +55,6 @@ import {
   printArrayElementType,
 } from "./print_array";
 import {
-  printIfClause,
-  printStatement,
-  printSwitchCaseClause,
-  printSwitchDefaultClause,
-} from "./print_statement";
-import {
   printAlignedModifier,
   printIdentifier,
   printLengthAttribute,
@@ -68,6 +62,12 @@ import {
 } from "./print_common";
 import { printElementaryType } from "./print_elementary_type";
 import { printStringLiteral } from "./print_string";
+import { printIfClause } from "./print_if";
+import { printStatement } from "./print_statement";
+import {
+  printSwitchCaseClause,
+  printSwitchDefaultClause,
+} from "./print_switch";
 
 export default function printNode(
   path: AstPath<AbstractNode>,

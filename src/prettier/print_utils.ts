@@ -6,7 +6,7 @@ import type {
 import { TokenKind } from "@flowscripter/mpeg-sdl-parser/src/tokenizer/enum/token_kind";
 import type { Doc } from "prettier";
 import { doc } from "prettier";
-const { hardline, join } = doc.builders;
+const { hardline, indent, join } = doc.builders;
 
 export function cleanupTrivia(node: AbstractNode) {
   for (const token of node.getSyntaxTokenIterable()) {
@@ -36,16 +36,41 @@ function getCommentString(trivia: Trivia): string {
   return "// " + commentText;
 }
 
-function getLeadingTriviaDoc(syntaxToken: SyntaxToken): Doc[] {
+/**
+ * Returns a doc for the leading trivia of a syntax token.
+ * @param syntaxToken The syntax token to get the leading trivia for.
+ * @param indentLeadingTriviaAsIndentIsCompleting Whether to indent the leading trivia as if it is completing a line.
+ *
+ * Note that if indentLeadingTriviaAsIndentIsCompleting is true, the leading trivia will include a hardline as this
+ * is required to perform the indent.
+ */
+function getLeadingTriviaDoc(
+  syntaxToken: SyntaxToken,
+  indentLeadingTriviaAsIndentIsCompleting: boolean,
+): Doc[] {
   if (!syntaxToken.leadingTrivia.length) {
+    if (indentLeadingTriviaAsIndentIsCompleting) {
+      return [hardline];
+    }
     return [];
   }
 
-  return [
-    join(
+  const elements = join(
+    hardline,
+    syntaxToken.leadingTrivia.map((trivia) => getCommentString(trivia)),
+  );
+
+  if (indentLeadingTriviaAsIndentIsCompleting) {
+    return [
+      indent(
+        [hardline, elements],
+      ),
       hardline,
-      syntaxToken.leadingTrivia.map((trivia) => getCommentString(trivia)),
-    ),
+    ];
+  }
+
+  return [
+    elements,
     hardline,
   ];
 }
@@ -65,8 +90,14 @@ function getTrailingTriviaDoc(syntaxToken: SyntaxToken): Doc[] {
   ];
 }
 
-export function getDocWithTrivia(token: SyntaxToken): Doc[] {
-  const leadingTriviaDoc = getLeadingTriviaDoc(token);
+export function getDocWithTrivia(
+  token: SyntaxToken,
+  indentLeadingTriviaAsIndentIsCompleting = false,
+): Doc[] {
+  const leadingTriviaDoc = getLeadingTriviaDoc(
+    token,
+    indentLeadingTriviaAsIndentIsCompleting,
+  );
   const trailingTriviaDoc = getTrailingTriviaDoc(token);
 
   return [

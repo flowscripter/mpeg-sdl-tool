@@ -11,11 +11,10 @@ import {
   PRINTER_SERVICE_ID,
   type PrinterService,
   type SubCommand,
-  SYNTAX_HIGHLIGHTER_SERVICE_ID,
-  type SyntaxHighlighterService,
 } from "@flowscripter/dynamic-cli-framework";
 import prettierPluginSdl from "../../prettier/prettierPluginSdl";
-import highlightSyntaxSdl from "../../highlight/highlightSyntaxSdl";
+import sdlHighlight from "../../util/sdl_highlight";
+import outputError from "../../util/output_error";
 
 /**
  * Command to parse and prettify an SDL file.
@@ -40,15 +39,11 @@ const prettify: SubCommand = {
     const printerService = context.getServiceById(
       PRINTER_SERVICE_ID,
     ) as PrinterService;
-    const highlighterService = context.getServiceById(
-      SYNTAX_HIGHLIGHTER_SERVICE_ID,
-    ) as SyntaxHighlighterService;
     const prettyPrinterService = context.getServiceById(
       PRETTY_PRINTER_SERVICE_ID,
     ) as PrettyPrinterService;
 
     prettyPrinterService.registerSyntax("sdl", prettierPluginSdl);
-    highlighterService.registerSyntax("sdl", highlightSyntaxSdl);
 
     const inputSdlFilePath = argumentValues.input as string;
 
@@ -63,32 +58,21 @@ const prettify: SubCommand = {
         "sdl",
       );
     } catch (error) {
-      printerService.error(
+      await printerService.error(
         `SDL file ${inputSdlFilePath} could not be parsed\n`,
         Icon.FAILURE,
       );
       if (error instanceof Error) {
-        printerService.warn(error.message + "\n");
+        await outputError(error, sdlSpecification, context);
       } else {
-        printerService.warn(String(error) + "\n");
+        await printerService.warn(String(error) + "\n");
       }
 
       return;
     }
-    const colorScheme = {
-      keyword: "#ffff00",
-      string: "#00ff00",
-      number: "#00ffff",
-      punctuation: "#00ff00",
-      operator: "#00ff00",
-    };
 
     await printerService.print(
-      highlighterService.highlight(
-        prettifiedSdlSpecification,
-        "sdl",
-        colorScheme,
-      ),
+      sdlHighlight(prettifiedSdlSpecification, context),
     );
   },
 };

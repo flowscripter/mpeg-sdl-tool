@@ -137,8 +137,9 @@ export function printClassDeclaration(
       join(hardline, path.map(print, "statements")),
     ]));
   }
-  parts.push(hardline);
-  parts.push(getDocWithTrivia(classDeclaration.closeBracePunctuatorToken));
+  parts.push(
+    getDocWithTrivia(classDeclaration.closeBracePunctuatorToken, true),
+  );
 
   return parts;
 }

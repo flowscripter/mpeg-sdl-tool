@@ -47,8 +47,11 @@ export function printAbstractMapOutputValue(
       elements.push(
         getDocWithTrivia(aggregateMapOutputValue.openBracePunctuatorToken),
       );
+      elements.push(
+        " ",
+      );
 
-      const outputValuesDoc = (path as AstPath<AbstractMapOutputValue>).map(
+      const outputValuesDoc = (path as AstPath<AggregateMapOutputValue>).map(
         print,
         "outputValues",
       );
@@ -58,6 +61,9 @@ export function printAbstractMapOutputValue(
           outputValuesDoc,
           aggregateMapOutputValue.commaPunctuatorTokens,
         ),
+      );
+      elements.push(
+        " ",
       );
       elements.push(
         getDocWithTrivia(aggregateMapOutputValue.closeBracePunctuatorToken),
@@ -83,19 +89,20 @@ export function printMapDeclaration(
 
   elements.push(getDocWithTrivia(mapDeclaration.mapKeywordToken));
   elements.push(path.call(print, "identifier"));
-  elements.push(
+
+  const subElements: Doc[] = [
     getDocWithTrivia(mapDeclaration.openParenthesisPunctuatorToken),
-  );
+  ];
 
   if (mapDeclaration.outputElementaryType !== undefined) {
-    elements.push(
+    subElements.push(
       path.call(
         print,
         "outputElementaryType" as keyof MapDeclaration["outputElementaryType"],
       ),
     );
   } else if (mapDeclaration.outputClassIdentifier !== undefined) {
-    elements.push(
+    subElements.push(
       path.call(
         print,
         "outputClassIdentifier" as keyof MapDeclaration[
@@ -104,15 +111,20 @@ export function printMapDeclaration(
       ),
     );
   }
-  elements.push(
-    getDocWithTrivia(mapDeclaration.openParenthesisPunctuatorToken),
+
+  subElements.push(
+    getDocWithTrivia(mapDeclaration.closeParenthesisPunctuatorToken),
   );
+
+  elements.push(subElements);
+
   elements.push(
     path.call(
       print,
       "mapEntryList",
     ),
   );
+
   return join(" ", elements);
 }
 
@@ -200,7 +212,10 @@ export function printMapEntryList(
 
   return [
     getDocWithTrivia(mapEntryList.openBracePunctuatorToken),
-    indent(elements),
+    indent([
+      hardline,
+      join(hardline, elements),
+    ]),
     hardline,
     getDocWithTrivia(mapEntryList.closeBracePunctuatorToken),
   ];

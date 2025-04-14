@@ -109,7 +109,7 @@ describe("CLI tests", () => {
 
     expect(mockExit).toHaveBeenCalledWith(0);
     expectCallsInclude(mockStderr, "Syntactic Description Language");
-    expectCallsInclude(mockStdout, "sdl");
+    expectCallsInclude(mockStdout, "bitstream");
     mockExit.mockRestore();
   });
 

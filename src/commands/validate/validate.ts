@@ -14,6 +14,7 @@ import {
   type SyntaxHighlighterService,
 } from "@flowscripter/dynamic-cli-framework";
 import { Parser } from "@flowscripter/mpeg-sdl-parser";
+import outputError from "../../util/output_error";
 
 /**
  * Command to parse and validate an SDL file.
@@ -52,27 +53,27 @@ const validate: SubCommand = {
         const highlighterService = context.getServiceById(
           SYNTAX_HIGHLIGHTER_SERVICE_ID,
         ) as SyntaxHighlighterService;
-        printerService.debug(
+        await printerService.debug(
           highlighterService.highlight(
             JSON.stringify(parsedSdlSpecification, undefined, 2),
             "json",
           ) + "\n",
         );
       }
-      printerService.debug;
-      printerService.info(
+
+      await printerService.info(
         `SDL file ${inputSdlFilePath} is valid\n`,
         Icon.SUCCESS,
       );
     } catch (error) {
-      printerService.error(
+      await printerService.error(
         `SDL file ${inputSdlFilePath} is invalid\n`,
         Icon.FAILURE,
       );
       if (error instanceof Error) {
-        printerService.warn(error.message + "\n");
+        await outputError(error, sdlSpecification, context);
       } else {
-        printerService.warn(String(error) + "\n");
+        await printerService.warn(String(error) + "\n");
       }
     }
   },
