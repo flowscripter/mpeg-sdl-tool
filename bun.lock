@@ -4,21 +4,21 @@
     "": {
       "name": "@flowscripter/mpeg-sdl-tool",
       "dependencies": {
-        "@flowscripter/dynamic-cli-framework": "^1.1.5",
-        "@flowscripter/mpeg-sdl-parser": "^1.1.12",
+        "@flowscripter/dynamic-cli-framework": "latest",
+        "@flowscripter/mpeg-sdl-parser": "latest",
       },
       "devDependencies": {
-        "@types/bun": "^1.2.9",
+        "@types/bun": "latest",
       },
       "peerDependencies": {
-        "typescript": "^5.8.3",
+        "typescript": "latest",
       },
     },
   },
   "packages": {
     "@flowscripter/dynamic-cli-framework": ["@flowscripter/dynamic-cli-framework@1.1.5", "", { "dependencies": { "emphasize": "^7.0.0", "fastest-levenshtein": "^1.0.16", "figlet": "^1.8.1", "highlight.js": "^11.11.1", "prettier": "^3.5.3", "supports-color": "^10.0.0", "ts-log": "^2.2.7" }, "peerDependencies": { "typescript": "^5.8.3" } }, "sha512-t3qv1v/diPn3tZOo5kYrhgYjqBmVvPc3TlVko61ygxUTPZfX+cqe0l/yNPw4QJK+0RHhuIclrSA7z07Rs2RW1A=="],
 
-    "@flowscripter/mpeg-sdl-parser": ["@flowscripter/mpeg-sdl-parser@1.1.12", "", { "dependencies": { "typescript-parsec": "^0.3.4" }, "peerDependencies": { "typescript": "^5.8.3" } }, "sha512-z5iunIACYO7RBt4Vs0/inYZZ2LhLwaF9g1GEOdgpVkAKMGnM4mhjSqgjRq7EWnmToMAv4qGMKO2ybjSLs3gAaw=="],
+    "@flowscripter/mpeg-sdl-parser": ["@flowscripter/mpeg-sdl-parser@1.1.13", "", { "dependencies": { "typescript-parsec": "^0.3.4" }, "peerDependencies": { "typescript": "^5.8.3" } }, "sha512-SW8tniRYRlYu59AREfYmUEYQKg4SkiKRYEylMmXii7096/9AEOZik608OKDmL05FSottYrARkHCro/d3EZt0Uw=="],
 
     "@types/bun": ["@types/bun@1.2.9", "", { "dependencies": { "bun-types": "1.2.9" } }, "sha512-epShhLGQYc4Bv/aceHbmBhOz1XgUnuTZgcxjxk+WXwNyDXavv5QHD1QEFV0FwbTSQtNq6g4ZcV6y0vZakTjswg=="],
 
