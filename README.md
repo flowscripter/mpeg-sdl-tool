@@ -3,15 +3,9 @@
 [![version](https://img.shields.io/github/v/release/flowscripter/mpeg-sdl-tool?sort=semver)](https://github.com/flowscripter/mpeg-sdl-tool/releases)
 [![build](https://img.shields.io/github/actions/workflow/status/flowscripter/mpeg-sdl-tool/release-bun-executable.yml)](https://github.com/flowscripter/mpeg-sdl-tool/actions/workflows/release-bun-executable.yml)
 [![coverage](https://codecov.io/gh/flowscripter/mpeg-sdl-tool/branch/main/graph/badge.svg?token=EMFT2938ZF)](https://codecov.io/gh/flowscripter/mpeg-sdl-tool)
-[![docs](https://img.shields.io/badge/docs-API-blue)](https://flowscripter.github.io/mpeg-sdl-tool/index.html)
 [![license: MIT](https://img.shields.io/github/license/flowscripter/mpeg-sdl-tool)](https://github.com/flowscripter/mpeg-sdl-tool/blob/main/LICENSE)
 
 > ISO/IEC 14496-34 Syntactic Description Language (MPEG SDL) CLI tool
-
-## TODO
-
-- Define SDL specific syntax for highlighting instead of using C syntax
-  definition.
 
 ## Binary Executable Usage
 
