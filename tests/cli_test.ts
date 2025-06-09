@@ -82,7 +82,7 @@ describe("CLI tests", () => {
     expect(cli()).rejects.toThrow("Mock exit");
 
     expect(mockExit).toHaveBeenCalledWith(0);
-    expectCallsInclude(mockStderr, "LEXICAL ERROR");
+    expectCallsInclude(mockStderr, "SYNTACTIC ERROR");
     mockExit.mockRestore();
   });
 
@@ -132,7 +132,7 @@ describe("CLI tests", () => {
     expect(cli()).rejects.toThrow("Mock exit");
 
     expect(mockExit).toHaveBeenCalledWith(0);
-    expectCallsInclude(mockStderr, "LEXICAL ERROR");
+    expectCallsInclude(mockStderr, "SYNTACTIC ERROR");
     mockExit.mockRestore();
   });
 });

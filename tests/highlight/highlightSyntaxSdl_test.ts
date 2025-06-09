@@ -10,6 +10,12 @@ import highlightSyntaxSdl from "../../src/highlight/highlightSyntaxSdl";
 import TtyTerminal from "@flowscripter/dynamic-cli-framework/src/service/printer/terminal/TtyTerminal";
 import { Writable } from "node:stream";
 import TtyStyler from "@flowscripter/dynamic-cli-framework/src/service/printer/terminal/TtyStyler";
+import {
+  createLenientSdlParser,
+  prettyPrint,
+  SdlStringInput,
+} from "@flowscripter/mpeg-sdl-parser";
+import { buildAst } from "@flowscripter/mpeg-sdl-parser/src/ast/buildAst";
 
 describe("Highlight Plugin SDL tests", () => {
   test("Highlight test", async () => {
@@ -32,6 +38,16 @@ describe("Highlight Plugin SDL tests", () => {
       path.join(__dirname, "../sample_specifications/various_elements.sdl"),
     ).then((buffer) => buffer.toString());
 
+    const sdlStringInput = new SdlStringInput(sampleSdlSpecification);
+    const parser = await createLenientSdlParser();
+
+    const sdlParseTree = parser.parse(sdlStringInput);
+    const sdlSpecification = buildAst(sdlParseTree, sdlStringInput);
+
+    const prettifiedSdlSpecification = await prettyPrint(
+      sdlSpecification,
+      sdlStringInput,
+    );
     const colorScheme = {
       keyword: "#f00000",
       string: "#f0f000",
@@ -41,7 +57,7 @@ describe("Highlight Plugin SDL tests", () => {
     };
 
     const highlighted = syntaxHighlighterService.highlight(
-      sampleSdlSpecification,
+      prettifiedSdlSpecification,
       "sdl",
       colorScheme,
     );
