@@ -12,9 +12,10 @@ import {
   type PrinterService,
   type SubCommand,
 } from "@flowscripter/dynamic-cli-framework";
-import prettierPluginSdl from "../../prettier/prettierPluginSdl";
 import sdlHighlight from "../../util/sdl_highlight";
 import outputError from "../../util/output_error";
+import prettierPluginSdl from "@flowscripter/mpeg-sdl-parser/src/prettier/prettierPluginSdl";
+import { SyntacticParseError } from "@flowscripter/mpeg-sdl-parser";
 
 /**
  * Command to parse and prettify an SDL file.
@@ -62,8 +63,8 @@ const prettify: SubCommand = {
         `SDL file ${inputSdlFilePath} could not be parsed\n`,
         Icon.FAILURE,
       );
-      if (error instanceof Error) {
-        await outputError(error, sdlSpecification, context);
+      if (error instanceof SyntacticParseError) {
+        await outputError(error, context);
       } else {
         await printerService.warn(String(error) + "\n");
       }
@@ -72,7 +73,7 @@ const prettify: SubCommand = {
     }
 
     await printerService.print(
-      sdlHighlight(prettifiedSdlSpecification, context),
+      sdlHighlight(prettifiedSdlSpecification + "\n", context),
     );
   },
 };

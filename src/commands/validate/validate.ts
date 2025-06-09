@@ -10,10 +10,12 @@ import {
   PRINTER_SERVICE_ID,
   type PrinterService,
   type SubCommand,
-  SYNTAX_HIGHLIGHTER_SERVICE_ID,
-  type SyntaxHighlighterService,
 } from "@flowscripter/dynamic-cli-framework";
-import { Parser } from "@flowscripter/mpeg-sdl-parser";
+import {
+  collateParseErrors,
+  createLenientSdlParser,
+  SdlStringInput,
+} from "@flowscripter/mpeg-sdl-parser";
 import outputError from "../../util/output_error";
 
 /**
@@ -38,7 +40,7 @@ const validate: SubCommand = {
     const printerService = context.getServiceById(
       PRINTER_SERVICE_ID,
     ) as PrinterService;
-    const parser = new Parser();
+    const parser = await createLenientSdlParser();
 
     const inputSdlFilePath = argumentValues.input as string;
 
@@ -46,35 +48,37 @@ const validate: SubCommand = {
       path.join(process.cwd(), inputSdlFilePath),
     ).then((buffer) => buffer.toString());
 
-    try {
-      const parsedSdlSpecification = parser.parse(sdlSpecification);
+    // Prepare the SDL input
+    const sdlStringInput = new SdlStringInput(sdlSpecification);
 
-      if (printerService.getLevel() === Level.DEBUG) {
-        const highlighterService = context.getServiceById(
-          SYNTAX_HIGHLIGHTER_SERVICE_ID,
-        ) as SyntaxHighlighterService;
+    const sdlParseTree = parser.parse(sdlStringInput);
+
+    if (printerService.getLevel() === Level.DEBUG) {
+      // Traverse and print the parse tree
+      const cursor = sdlParseTree.cursor();
+      do {
         await printerService.debug(
-          highlighterService.highlight(
-            JSON.stringify(parsedSdlSpecification, undefined, 2),
-            "json",
-          ) + "\n",
+          `Node ${cursor.name} from ${cursor.from} to ${cursor.to}\n`,
         );
-      }
+      } while (cursor.next());
+    }
 
-      await printerService.info(
-        `SDL file ${inputSdlFilePath} is valid\n`,
-        Icon.SUCCESS,
-      );
-    } catch (error) {
+    // Check for any parse errors
+    const parseErrors = collateParseErrors(sdlParseTree, sdlStringInput);
+
+    if (parseErrors.length > 0) {
       await printerService.error(
         `SDL file ${inputSdlFilePath} is invalid\n`,
         Icon.FAILURE,
       );
-      if (error instanceof Error) {
-        await outputError(error, sdlSpecification, context);
-      } else {
-        await printerService.warn(String(error) + "\n");
+      for (const error of parseErrors) {
+        await outputError(error, context);
       }
+    } else {
+      await printerService.info(
+        `SDL file ${inputSdlFilePath} is valid\n`,
+        Icon.SUCCESS,
+      );
     }
   },
 };

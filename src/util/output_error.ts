@@ -1,4 +1,7 @@
-import { type Location } from "@flowscripter/mpeg-sdl-parser";
+import {
+  type Location,
+  SyntacticParseError,
+} from "@flowscripter/mpeg-sdl-parser";
 import sdlHighlight from "./sdl_highlight";
 const LINE_NUMBER_SUFFIX = " |    ";
 
@@ -9,8 +12,7 @@ import {
 } from "@flowscripter/dynamic-cli-framework";
 
 async function outputError(
-  error: Error,
-  sdlSpecification: string,
+  error: SyntacticParseError,
   context: Context,
 ): Promise<void> {
   const printerService = context.getServiceById(
@@ -19,34 +21,39 @@ async function outputError(
 
   if ("location" in error && error.location) {
     const location = error.location as Location;
-    const rowEnd = location.row;
-    const column = location.column;
+    const row = location?.row || 1;
+    const column = location?.column || 1;
 
-    let rowStart = rowEnd - 6;
-    if (rowStart < 1) {
-      rowStart = 1;
-    }
-
-    const rowEndString = rowEnd.toString();
-    const lineNumberChars = rowEndString.length;
+    const lineNumberChars = row.toString().length;
     const pointerLineSpacing = lineNumberChars + LINE_NUMBER_SUFFIX.length +
       column - 1;
 
-    const outputLines = [];
+    await printerService.warn("\n");
 
-    for (let i = rowStart; i <= rowEnd; i++) {
-      const line = sdlSpecification.split("\n")[i - 1];
-      const lineNumber = i.toString().padStart(lineNumberChars, " ");
-      outputLines.push(
+    for (let i = error.preceedingLines?.length || 0; i > 0; i--) {
+      const line = error.preceedingLines![i - 1];
+      const lineNumber = (row - i).toString().padStart(lineNumberChars, " ");
+      await printerService.warn(
         `${printerService.yellow(lineNumber + LINE_NUMBER_SUFFIX)}${
-          sdlHighlight(line, context)
-        }`,
+          sdlHighlight(
+            line,
+            context,
+          )
+        }\n`,
       );
     }
+    await printerService.warn(
+      `${printerService.yellow(row + LINE_NUMBER_SUFFIX)}${
+        sdlHighlight(
+          error.errorLine || "",
+          context,
+        )
+      }\n`,
+    );
 
-    outputLines.push(printerService.red(" ".repeat(pointerLineSpacing) + "^"));
-
-    await printerService.warn("\n" + outputLines.join("\n") + "\n");
+    await printerService.warn(
+      printerService.red(" ".repeat(pointerLineSpacing) + "^\n"),
+    );
   }
 
   await printerService.warn(error.message + "\n");
