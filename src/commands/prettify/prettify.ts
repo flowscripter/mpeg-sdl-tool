@@ -14,7 +14,7 @@ import {
 } from "@flowscripter/dynamic-cli-framework";
 import sdlHighlight from "../../util/sdl_highlight";
 import outputError from "../../util/output_error";
-import prettierPluginSdl from "@flowscripter/mpeg-sdl-parser/src/prettier/prettierPluginSdl";
+import { prettierPluginSdl } from "@flowscripter/mpeg-sdl-parser/src/prettier/prettierPluginSdl";
 import { SyntacticParseError } from "@flowscripter/mpeg-sdl-parser";
 
 /**
