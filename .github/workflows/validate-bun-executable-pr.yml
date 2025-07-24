@@ -7,5 +7,4 @@ permissions:
 jobs:
   call-validate-bun-executable-pr:
     uses: flowscripter/.github/.github/workflows/validate-bun-executable-pr.yml@v1
-    secrets:
-      NPM_GITHUB_TOKEN: ${{ secrets.NPM_GITHUB_TOKEN }}
+    secrets: inherit
