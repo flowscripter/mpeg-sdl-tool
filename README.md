@@ -84,7 +84,7 @@ Lint:
 
 ## Documentation
 
-Refer to the [mpeg-sdl-parser](https://github.com/flowscripter/mpeg-sdl-parser)
+Refer to the [mpeg-sdl-parser](https://github.com/mpeggroup/mpeg-sdl-parser)
 documentation.
 
 Refer to the

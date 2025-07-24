@@ -15,7 +15,7 @@ import {
   collateParseErrors,
   createLenientSdlParser,
   SdlStringInput,
-} from "@flowscripter/mpeg-sdl-parser";
+} from "@mpeggroup/mpeg-sdl-parser";
 import outputError from "../../util/output_error";
 
 /**

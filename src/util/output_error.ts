@@ -1,7 +1,7 @@
 import {
   type Location,
   SyntacticParseError,
-} from "@flowscripter/mpeg-sdl-parser";
+} from "@mpeggroup/mpeg-sdl-parser";
 import sdlHighlight from "./sdl_highlight";
 const LINE_NUMBER_SUFFIX = " |    ";
 
