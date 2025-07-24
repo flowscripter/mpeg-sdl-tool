@@ -36,6 +36,15 @@ You can download and extract the binary zip files from the
 
 Refer to [functional_tests/README.md](functional_tests/README.md)
 
+## Setup
+
+`@mpeggroup/mpeg-sdl-parser` is hosted on GitHub packages, so before installing
+dependencies, authentication needs to be configured. Create a GitHub class
+personal access token which has permission to read packages and then set it in
+your environment:
+
+`export NPM_GITHUB_TOKEN=<your_classic_PAT>`
+
 ## Development
 
 Install dependencies:
@@ -75,7 +84,7 @@ Lint:
 
 ## Documentation
 
-Refer to the [mpeg-sdl-parser](https://github.com/flowscripter/mpeg-sdl-parser)
+Refer to the [mpeg-sdl-parser](https://github.com/mpeggroup/mpeg-sdl-parser)
 documentation.
 
 Refer to the

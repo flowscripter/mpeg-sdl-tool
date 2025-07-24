@@ -14,8 +14,8 @@ import {
   createLenientSdlParser,
   prettyPrint,
   SdlStringInput,
-} from "@flowscripter/mpeg-sdl-parser";
-import { buildAst } from "@flowscripter/mpeg-sdl-parser/src/ast/buildAst";
+} from "@mpeggroup/mpeg-sdl-parser";
+import { buildAst } from "@mpeggroup/mpeg-sdl-parser/src/ast/buildAst";
 
 describe("Highlight Plugin SDL tests", () => {
   test("Highlight test", async () => {

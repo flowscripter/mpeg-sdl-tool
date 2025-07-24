@@ -14,8 +14,8 @@ import {
 } from "@flowscripter/dynamic-cli-framework";
 import sdlHighlight from "../../util/sdl_highlight";
 import outputError from "../../util/output_error";
-import prettierPluginSdl from "@flowscripter/mpeg-sdl-parser/src/prettier/prettierPluginSdl";
-import { SyntacticParseError } from "@flowscripter/mpeg-sdl-parser";
+import { prettierPluginSdl } from "@mpeggroup/mpeg-sdl-parser/src/prettier/prettierPluginSdl";
+import { SyntacticParseError } from "@mpeggroup/mpeg-sdl-parser";
 
 /**
  * Command to parse and prettify an SDL file.
