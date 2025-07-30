@@ -4,14 +4,14 @@
     "": {
       "name": "@flowscripter/mpeg-sdl-tool",
       "dependencies": {
-        "@flowscripter/dynamic-cli-framework": "^1.1.6",
-        "@mpeggroup/mpeg-sdl-parser": "^1.0.7",
+        "@flowscripter/dynamic-cli-framework": "latest",
+        "@mpeggroup/mpeg-sdl-parser": "latest",
       },
       "devDependencies": {
-        "@types/bun": "^1.2.19",
+        "@types/bun": "latest",
       },
       "peerDependencies": {
-        "typescript": "^5.8.3",
+        "typescript": "latest",
       },
     },
   },
