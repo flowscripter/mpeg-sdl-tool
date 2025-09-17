@@ -6,7 +6,7 @@ import {
   DefaultPrinterService,
   DefaultSyntaxHighlighterService,
 } from "@flowscripter/dynamic-cli-framework";
-import highlightSyntaxSdl from "../../src/highlight/highlightSyntaxSdl";
+import highlightSyntaxSdl from "../../src/highlight/highlightSyntaxSdl.js";
 import TtyTerminal from "@flowscripter/dynamic-cli-framework/src/service/printer/terminal/TtyTerminal";
 import { Writable } from "node:stream";
 import TtyStyler from "@flowscripter/dynamic-cli-framework/src/service/printer/terminal/TtyStyler";

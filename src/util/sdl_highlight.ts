@@ -5,7 +5,7 @@ import {
   SYNTAX_HIGHLIGHTER_SERVICE_ID,
   type SyntaxHighlighterService,
 } from "@flowscripter/dynamic-cli-framework";
-import highlightSyntaxSdl from "../highlight/highlightSyntaxSdl";
+import highlightSyntaxSdl from "../highlight/highlightSyntaxSdl.js";
 import type { ColorScheme } from "@flowscripter/dynamic-cli-framework/src/api/service/core/SyntaxHighlighterService";
 
 let syntaxHighlighterService: SyntaxHighlighterService | undefined = undefined;
