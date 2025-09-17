@@ -1,5 +1,5 @@
 import { type Location, SyntacticParseError } from "@mpeggroup/mpeg-sdl-parser";
-import sdlHighlight from "./sdl_highlight";
+import sdlHighlight from "./sdl_highlight.ts";
 const LINE_NUMBER_SUFFIX = " |    ";
 
 import {

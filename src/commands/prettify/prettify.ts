@@ -12,8 +12,8 @@ import {
   type PrinterService,
   type SubCommand,
 } from "@flowscripter/dynamic-cli-framework";
-import sdlHighlight from "../../util/sdl_highlight";
-import outputError from "../../util/output_error";
+import sdlHighlight from "../../util/sdl_highlight.ts";
+import outputError from "../../util/output_error.ts";
 import { prettierPluginSdl } from "@mpeggroup/mpeg-sdl-parser/src/prettier/prettierPluginSdl";
 import { SyntacticParseError } from "@mpeggroup/mpeg-sdl-parser";
 

@@ -16,7 +16,7 @@ import {
   createLenientSdlParser,
   SdlStringInput,
 } from "@mpeggroup/mpeg-sdl-parser";
-import outputError from "../../util/output_error";
+import outputError from "../../util/output_error.ts";
 
 /**
  * Command to parse and validate an SDL file.
