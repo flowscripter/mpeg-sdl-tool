@@ -92,4 +92,3 @@ documentation.
 ## License
 
 MIT © Flowscripter
-
