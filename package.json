@@ -29,6 +29,6 @@
   },
   "dependencies": {
     "@flowscripter/dynamic-cli-framework": "^1.1.6",
-    "@mpeggroup/mpeg-sdl-parser": "^1.0.7"
+    "@mpeggroup/mpeg-sdl-parser": "^1.0.9"
   }
 }
